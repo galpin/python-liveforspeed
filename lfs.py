@@ -53,7 +53,7 @@ class StaticWheelInfo(object):
   y = None                # relative to reference point
   z = None                # relative to reference point
   radius = None           # unloaded
-  width= None             # at widest point
+  width = None             # at widest point
   maximum_deflect = None  # suspension travel
   tyre_type = None        # see documentation
   spring_constant = None  # N/m
