@@ -48,20 +48,18 @@ import struct, math
 
 class StaticWheelInfo(object):
   '''This class represents static wheel information.'''
-  
-  x = None                # relative to reference point
-  y = None                # relative to reference point
-  z = None                # relative to reference point
-  radius = None           # unloaded
-  width = None             # at widest point
-  maximum_deflect = None  # suspension travel
-  tyre_type = None        # see documentation
-  spring_constant = None  # N/m
-  damping_c = None        # Ns/m
-  damping_r = None        # Ns/m
-  max_brake_torque = None # Nm
-
   def __init__(self, **kwargs):
+    self.x = None                # relative to reference point
+    self.y = None                # relative to reference point
+    self.z = None                # relative to reference point
+    self.radius = None           # unloaded
+    self.width = None            # at widest point
+    self.maximum_deflect = None  # suspension travel
+    self.tyre_type = None        # see documentation
+    self.spring_constant = None  # N/m
+    self.damping_c = None        # Ns/m
+    self.damping_r = None        # Ns/m
+    self.max_brake_torque = None # Nm
     self.__dict__.update(kwargs)
 
   @staticmethod
@@ -92,17 +90,16 @@ class StaticWheelInfo(object):
 class DynamicWheelInfo(object):
   '''This class represents dynamic wheel information.'''
   
-  suspension_deflect = None # compression from unloaded
-  steer = None              # including Ackermann and toe
-  x_force = None            # force right
-  y_force = None            # force forward
-  vertical_load = None      # perpendicular to surface
-  angular_velocity = None   # radians/s
-  lean = None               # releative to road (radians/s) viewed from rear
-  air_temp = None           # degrees C
-  slip_fraction = None      # 0 - 255
-  
   def __init__(self, **kwargs):
+    self.suspension_deflect = None # compression from unloaded
+    self.steer = None              # including Ackermann and toe
+    self.x_force = None            # force right
+    self.y_force = None            # force forward
+    self.vertical_load = None      # perpendicular to surface
+    self.angular_velocity = None   # radians/s
+    self.lean = None               # releative to road (radians/s) viewed from rear
+    self.air_temp = None           # degrees C
+    self.slip_fraction = None      # 0 - 255
     self.__dict__.update(kwargs)
   
   @staticmethod
@@ -117,7 +114,7 @@ class DynamicWheelInfo(object):
     
     return wheel
     
-  def __str__(self):
+  def __repr__(self):
     '''
     Returns:
       A string representation of this lfs.DynamicWheelInfo instance.
@@ -126,32 +123,32 @@ class DynamicWheelInfo(object):
     
 class DataBlock(object):
   '''This class represents a single sampled datablock.'''
-  throttle = None       # throttle (0 to 1)          
-  brake = None          # brake (0 to 1)
-  input_steer = None    # input steer (radians)
-  clutch = None         # clutch (0 to 1)
-  handbrake = None      # handbrake (0 to 1)
-  gear = None           # gear (0=R 1=N 2=first gear)
-  lateral_g = None      # lateral G -120 to 120 = -6 to 6G
-  forward_g = None      # forward G -120 to 120 = -6 to 6G
-  upwards_g = None      # upwards G -120 to 120 = -6 to 6G
-  speed = None          # m/s
-  car_distance = None   # m - travelled by car
-  position_x = None     # map X (1m = 65536)
-  position_y = None     # map Y (1m = 65536)
-  position_z = None     # map Z (1m = 65536)
-  engine_speed = None   # radians/s
-  index_distance = None # m - track ruler measurement
-  rx = None             # x of right-vector
-  ry = None             # y of right-vector
-  rz = None             # z of right-vector
-  fx = None             # x of forward-vector
-  fy = None             # y of forward-vector
-  fz = None             # z of forward-vector
-  heading = None        # anti-clockwise from above (calculated)
-  wheels = []           # an instance of DynamicWheelInfo for each wheel
-  
+
   def __init__(self, **kwargs):
+    self.throttle = None       # throttle (0 to 1)          
+    self.brake = None          # brake (0 to 1)
+    self.input_steer = None    # input steer (radians)
+    self.clutch = None         # clutch (0 to 1)
+    self.handbrake = None      # handbrake (0 to 1)
+    self.gear = None           # gear (0=R 1=N 2=first gear)
+    self.lateral_g = None      # lateral G -120 to 120 = -6 to 6G
+    self.forward_g = None      # forward G -120 to 120 = -6 to 6G
+    self.upwards_g = None      # upwards G -120 to 120 = -6 to 6G
+    self.speed = None          # m/s
+    self.car_distance = None   # m - travelled by car
+    self.position_x = None     # map X (1m = 65536)
+    self.position_y = None     # map Y (1m = 65536)
+    self.position_z = None     # map Z (1m = 65536)
+    self.engine_speed = None   # radians/s
+    self.index_distance = None # m - track ruler measurement
+    self.rx = None             # x of right-vector
+    self.ry = None             # y of right-vector
+    self.rz = None             # z of right-vector
+    self.fx = None             # x of forward-vector
+    self.fy = None             # y of forward-vector
+    self.fz = None             # z of forward-vector
+    self.heading = None        # anti-clockwise from above (calculated)
+    self.wheels = []           # an instance of DynamicWheelInfo for each wheel
     self.__dict__.update(kwargs)
   
   @staticmethod
@@ -174,7 +171,7 @@ class DataBlock(object):
       
     return block
     
-  def __str__(self):
+  def __repr__(self):
     '''Returns:
       A string representation of this lfs.DataBlock instance.
     '''
@@ -188,32 +185,6 @@ class Replay(object):
     import lfs
     raf = lfs.Replay('hotlap.raf')
   '''
-  raf_version = None              # Live For Speed RAF version
-  lfs_version = None              # Live For Speed version  
-  update_interval = None          # ms
-  short_track_name = None         # e.g. BL2R
-  track_ruler_length = None       # total index distance
-  player = None                   # player name
-  car = None                      # car name
-  track = None                    # track name
-  config = None                   # track configuration
-  weather = None                  # weather description
-  player_flags = None             # driver aids (see docs)
-  num_wheels = None               # number of wheels (hopefully four...)
-  hlvc_legal = None               # hotlap legal: Unknown (None), True, False
-  num_splits = None               # number of splits (includes lap time)
-  splits = []                     # splits (always four)
-  mass = None                     # mass (kg)
-  sprung_mass = None              # sprung_mass (kg)
-  antiroll_rear = None            # n/M
-  antiroll_front = None           # n/M
-  final_drive = None              # final drive ratio
-  num_gears = None                # number of forward gears
-  gear_ratios = []                # gear ratios (forward)
-  
-  static_wheel_info = []          # instance of StaticWheelInfo for each wheel
-  data = []                       # instance of DataBlock for each sample
-  
   def __init__(self, path=None, **kwargs):
     '''Creates an instance of lfs.Replay. 
     
@@ -223,7 +194,33 @@ class Replay(object):
     Args:
       path
         The path to the Live For Speed RAF file to open.
-    '''
+    '''  
+    self.raf_version = None              # Live For Speed RAF version
+    self.lfs_version = None              # Live For Speed version  
+    self.update_interval = None          # ms
+    self.short_track_name = None         # e.g. BL2R
+    self.track_ruler_length = None       # total index distance
+    self.player = None                   # player name
+    self.car = None                      # car name
+    self.track = None                    # track name
+    self.config = None                   # track configuration
+    self.weather = None                  # weather description
+    self.player_flags = None             # driver aids (see docs)
+    self.num_wheels = None               # number of wheels (hopefully four...)
+    self.hlvc_legal = None               # hotlap legal: Unknown (None), True, False
+    self.num_splits = None               # number of splits (includes lap time)
+    self.splits = []                     # splits (always four)
+    self.mass = None                     # mass (kg)
+    self.sprung_mass = None              # sprung_mass (kg)
+    self.antiroll_rear = None            # n/M
+    self.antiroll_front = None           # n/M
+    self.final_drive = None              # final drive ratio
+    self.num_gears = None                # number of forward gears
+    self.gear_ratios = []                # gear ratios (forward)
+
+    self.static_wheel_info = []          # instance of StaticWheelInfo for each wheel
+    self.data = []                       # instance of DataBlock for each sample
+    
     if path:
       with open(path, 'rb') as f:
         self.__dict__.update(Replay.from_file(f).__dict__)
@@ -334,7 +331,7 @@ class Replay(object):
       
     return replay
   
-  def __str__(self):
+  def __repr__(self):
     '''
     Returns:
       A string representation of this lfs.Replay instance.
