@@ -7,5 +7,5 @@ setup(
   author='Martin Galpin',
   author_email='m@66laps.com',
   url='http://developer.66laps.com/',
-  modules=['lfs']
+  py_modules=['lfs']
 )
